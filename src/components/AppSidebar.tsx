@@ -111,8 +111,8 @@ const AppSidebar = () => {
                                 <SidebarMenu>
                                     <SidebarMenuItem>
                                         <SidebarMenuButton asChild>
-                                            <Link href="#">
-                                                <Projector /> See All Projects
+                                            <Link href="/payments">
+                                                <Projector /> See All Payments
                                             </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
@@ -135,8 +135,8 @@ const AppSidebar = () => {
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <Link href="#">
-                                        <Projector /> See All Projects
+                                    <Link href="/users/mustafiz">
+                                        <Projector /> See All Users
                                     </Link>
                                 </SidebarMenuButton>
                                 <SidebarMenuSub>
