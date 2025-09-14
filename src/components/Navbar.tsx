@@ -1,6 +1,6 @@
 "use client"
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import { LogOut, Moon, Settings, SquareMenu, Sun, User } from 'lucide-react'
+import { LogOut, Moon, Search, Settings, SquareMenu, Sun, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import {
@@ -20,7 +20,13 @@ export const Navbar = () => {
     return (
         <nav className="p-4 flex items-center justify-between sticky top-0 bg-background z-10">
             {/* LEFT  */}
-            <SidebarTrigger/>
+            <div className='flex gap-3 items-center'>
+                <SidebarTrigger/> 
+                <div className='flex justify-between items-center'>
+                    <input type='text' placeholder='Search here' className='border rounded-full py-2 px-3 lg:min-w-[600px]'/>
+                    <div className='p-2 rounded-full bg-accent-foreground ml-[-40]'><Search size='18' className='text-primary-foreground'/></div>
+                </div>
+            </div>
             {/* RIGHT  */}
             <div className="flex items-center gap-4">
                 <Link href="/">Dashboard</Link>
