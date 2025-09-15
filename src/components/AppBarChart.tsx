@@ -1,96 +1,161 @@
 "use client"
 
-import { BadgeCheck, TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
-
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-} from "@/components/ui/chart"
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  Tooltip,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Legend,
+  LegendProps,
+} from "recharts"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { BadgeCheck } from "lucide-react"
 
-export const description = "A multiple bar chart"
+// Define chart config
+interface ChartConfig {
+  [key: string]: {
+    label: string;
+    color: string;
+  };
+}
 
-const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
+const productData = [
+  {
+    name: "Gold Ring",
+    thisMonth: 124,
+    lastMonth: 98,
+  },
+  {
+    name: "Diamond Earrings",
+    thisMonth: 89,
+    lastMonth: 76,
+  },
+  {
+    name: "Lipstick",
+    thisMonth: 210,
+    lastMonth: 185,
+  },
+  {
+    name: "Perfume",
+    thisMonth: 145,
+    lastMonth: 132,
+  },
+  {
+    name: "Necklace",
+    thisMonth: 67,
+    lastMonth: 59,
+  },
+  {
+    name: "Nail Polish",
+    thisMonth: 92,
+    lastMonth: 88,
+  },
 ]
 
-const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "var(--chart-3)",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "var(--chart-2)",
-    },
-} satisfies ChartConfig
-
-export default function AppBarChart() {
+// ✅ Custom Tooltip
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload
     return (
-        <Card className="bg-transparent p-0 border-0 shadow-none">
-            <CardHeader>
-                <CardTitle>
-                    <div className="flex gap-2 items-center">
-                        <BadgeCheck />
-                        <h3 className="text-lg">Popular Product</h3>
-                    </div>
-                </CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
-            </CardHeader>
-            <CardContent className="p-0">
-                <ChartContainer config={chartConfig}>
-                    <BarChart
-                        accessibilityLayer
-                        data={chartData}
-                        layout="vertical"
-                    >
-                        <CartesianGrid horizontal={false} />
-                        <XAxis
-                            type="number"
-                            tickLine={false}
-                            tickMargin={10}
-                            axisLine={false}
-                        />
-                        <YAxis
-                            dataKey="month"
-                            type="category"
-                            tickLine={false}
-                            tickMargin={10}
-                            axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)} // Shorten month names
-                        />
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent indicator="dot" />}
-                        />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-                        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-                    </BarChart>
-                </ChartContainer>
-            </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
-        </Card>
+      <div className="rounded-md bg-white dark:bg-black border px-3 py-1 text-sm shadow">
+        <p className="font-medium">{data.name}</p>
+        <p className="">This Month: {data.thisMonth} units</p>
+        <p className="">Last Month: {data.lastMonth} units</p>
+      </div>
     )
+  }
+  return null
+}
+
+// ✅ Matching data keys
+const chartConfig: ChartConfig = {
+  thisMonth: {
+    label: "This Month",
+    color: "var(--chart-3)",
+  },
+  lastMonth: {
+    label: "Last Month",
+    color: "var(--chart-2)", 
+  },
+}
+
+// ✅ Legend Formatter
+const legendFormatter: LegendProps['formatter'] = (value) => {
+  const config = chartConfig[value as keyof ChartConfig]
+  return <span style={{ color: config?.color }}>{config?.label}</span>
+}
+
+export default function ProductBarChart() {
+  return (
+    <Card className="bg-transparent p-0 border-0 shadow-none">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <BadgeCheck className="h-5 w-5" />
+          <p className="text-lg">Popular Product</p>
+        </CardTitle>
+        <CardDescription>Cosmetics & Jewellery – This Month vs Last Month</CardDescription>
+      </CardHeader>
+
+      <CardContent className="p-0">
+        <ResponsiveContainer width="100%" height={360}>
+          <BarChart
+            data={productData}
+            layout="vertical"
+            margin={{ top: 5, right: 10, left: 0, bottom: 10 }}
+            barCategoryGap={20}
+          >
+            <CartesianGrid horizontal={false} vertical={false} />
+            <XAxis type="number" hide />
+            <YAxis
+              type="category"
+              dataKey="name"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 12, fill: "#374151" }}
+              width={140}
+            />
+
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
+            <Legend
+              verticalAlign="bottom"
+              height={16}
+              formatter={legendFormatter}
+            />
+
+            {/* Last Month */}
+            <Bar
+              dataKey="lastMonth"
+              fill={chartConfig.lastMonth.color}
+              barSize={16}
+              radius={[0, 6, 6, 0]}
+            >
+              <LabelList
+                dataKey="lastMonth"
+                position="right"
+                style={{ fill: "#9ca3af", fontSize: 12 }}
+              />
+            </Bar>
+
+            {/* This Month */}
+            <Bar
+              dataKey="thisMonth"
+              fill={chartConfig.thisMonth.color}
+              barSize={16}
+              radius={[0, 6, 6, 0]}
+            >
+              <LabelList
+                dataKey="thisMonth"
+                position="right"
+                style={{ fill: "#6b7280", fontSize: 12 }}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+  )
 }

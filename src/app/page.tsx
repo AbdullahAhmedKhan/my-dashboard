@@ -113,13 +113,13 @@ const Homepage = () => {
         <div className="bg-primary-foreground p-4 rounded-lg 2xl:col-span-2">
           <AppBarChart />
         </div>
-        <div className="bg-primary-foreground p-4 rounded-lg">
+        <div className="bg-primary-foreground p-4 rounded-lg 2xl:col-span-2">
           <AppPieChart />
         </div>
-        <div className="bg-primary-foreground p-4 rounded-lg">
+        <div className="bg-primary-foreground p-4 rounded-lg 2xl:col-span-2">
           <TodoList />
         </div>
-        <div className="bg-primary-foreground p-4 rounded-lg"> <CardList title="Latest Transactions" /></div>
+        <div className="bg-primary-foreground p-4 rounded-lg 2xl:col-span-2"> <CardList title="Latest Transactions" /></div>
       </div>
     </>
 
