@@ -18,24 +18,20 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export const description = "A bar chart with a custom label"
+export const description = "A bar chart with a custom label for popular products"
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { product: "Diamond Necklace", value: 250 },
+  { product: "Gold Earrings", value: 180 },
+  { product: "Ruby Bracelet", value: 120 },
+  { product: "Lipstick", value: 280 },
+  { product: "Foundation", value: 220 },
+  { product: "Mascara", value: 150 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-2)",
-  },
-  mobile: {
-    label: "Mobile",
+  value: {
+    label: "Value",
     color: "var(--chart-2)",
   },
   label: {
@@ -45,10 +41,10 @@ const chartConfig = {
 
 export default function ChartBarLabelCustom() {
   return (
-    <Card>
+    <Card className="bg-transparent p-0 border-0 shadow-none">
       <CardHeader>
-        <CardTitle>Bar Chart - Custom Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Popular Products</CardTitle>
+        <CardDescription>Last 30 Days</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -62,34 +58,34 @@ export default function ChartBarLabelCustom() {
           >
             <CartesianGrid horizontal={false} />
             <YAxis
-              dataKey="month"
+              dataKey="product"
               type="category"
-              tickLine={false}
+              tickLine={true}
               tickMargin={10}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
               hide
             />
-            <XAxis dataKey="desktop" type="number" hide />
+            <XAxis dataKey="value" type="number" hide />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
+              content={<ChartTooltipContent indicator="dot" />}
             />
             <Bar
-              dataKey="desktop"
+              dataKey="value"
               layout="vertical"
-              fill="var(--color-desktop)"
+              fill="var(--color-value)"
               radius={4}
             >
               <LabelList
-                dataKey="month"
+                dataKey="product"
                 position="insideLeft"
                 offset={8}
                 className="fill-(--color-label)"
                 fontSize={12}
               />
               <LabelList
-                dataKey="desktop"
+                dataKey="value"
                 position="right"
                 offset={8}
                 className="fill-foreground"
@@ -100,11 +96,8 @@ export default function ChartBarLabelCustom() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing top products by value for the last 30 days
         </div>
       </CardFooter>
     </Card>
