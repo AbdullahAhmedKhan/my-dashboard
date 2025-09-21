@@ -76,25 +76,6 @@ export const Navbar = () => {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="icon">
-                            <SquareMenu />
-                            <span className="sr-only">Open Menu</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem>
-                            Menu Item 1
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            Menu Item 2
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            Menu Item 3
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
             </div>
 
         </nav>
