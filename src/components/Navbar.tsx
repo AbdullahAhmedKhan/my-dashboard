@@ -1,6 +1,6 @@
 "use client"
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import { LogOut, Moon, Search, Settings, SquareMenu, Sun, User } from 'lucide-react'
+import { LogOut, Moon, Search, Settings, Sun, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import {
