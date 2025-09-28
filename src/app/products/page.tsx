@@ -12,6 +12,7 @@ import Necklace11 from '../../assets/images/products/Necklace11.webp'
 import Rings04 from '../../assets/images/products/Rings04.webp'
 import Rings05 from '../../assets/images/products/Rings05.webp'
 import { Progress } from "@/components/ui/progress"
+import Link from "next/link"
 
 const page = () => {
     return (
@@ -29,7 +30,9 @@ const page = () => {
             </Breadcrumb>
             <div className="flex justify-between items-center">
                 <h2 className="my-3 text-2xl font-semibold">Products</h2>
-                <Button><Plus />Add Product</Button>
+                <Link href="/products/add-product">
+                    <Button><Plus className="mr-1" />Add New Product</Button>
+                </Link>
             </div>
             <div>
                 <Tabs defaultValue="active" className="w-[400px]">
