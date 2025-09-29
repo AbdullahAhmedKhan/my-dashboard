@@ -18,7 +18,7 @@ interface Variant {
     imageUrl: string | null;
 }
 
-const page = () => {
+const Page = () => {
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [variants, setVariants] = useState<Variant[]>([]);
     const [metaImage, setMetaImage] = useState<string | null>(null);
@@ -487,4 +487,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
