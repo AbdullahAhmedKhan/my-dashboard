@@ -36,108 +36,122 @@ const page = () => {
                 </Link>
             </div>
 
-<Card className="mt-5 p-6 rounded-lg">
-    <CardHeader className="p-0 text-xl font-bold text-gray-800 border-b pb-4">Add New Product</CardHeader>
-    <form className="grid gap-6 mt-6 md:grid-cols-3">
-        {/* <!-- Product Description Section --> */}
-        <Card className="p-4 shadow-sm border border-gray-200 rounded-lg">
-            <CardHeader className="p-0 mb-4">
-                <CardTitle className="text-sm font-semibold text-gray-800">Product Description</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0 space-y-4">
-                <div className="space-y-1">
-                    <Label htmlFor="product-name" className="text-sm font-medium text-gray-700">Product Name</Label>
-                    <Input id="product-name" className="w-full" placeholder="Enter product name" />
+            <div className="card border rounded-lg mt-5 overflow-hidden">
+                <div className="card-header py-5 border-b bg-muted-foreground/5">
+                    <h2 className="px-5 text-xl font-semibold">Add New Product</h2>
                 </div>
-                <div className="space-y-1">
-                    <Label htmlFor="category" className="text-sm font-medium text-gray-700">Category</Label>
-                    <Select>
-                        <SelectTrigger id="category">
-                            <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="electronics">Electronics</SelectItem>
-                            <SelectItem value="clothing">Clothing</SelectItem>
-                            <SelectItem value="books">Books</SelectItem>
-                            <SelectItem value="home">Home</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="variant" className="text-sm font-medium text-gray-700">Variant</Label>
-                    <div className="flex gap-2">
-                        <Input id="variant" className="flex-1" placeholder="Enter variant (e.g., Size: M)" />
-                        <Button type="button" variant="outline">Add Variant</Button>
+                <div className="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
+                    <div>
+                        <fieldset className="border p-5 xl:p-8 rounded-2xl h-full ">
+                            <legend className="text-xl">Product Description</legend>
+                            <div className="flex flex-col gap-3">
+                                <div>
+                                    <Label>Product Name</Label>
+                                    <Input type="text" placeholder="Product Name" className="mt-2" />
+                                </div>
+                                <div className="flex gap-3">
+                                    <div className="grow">
+                                        <Label>Category</Label>
+                                        <div>
+                                            <Select>
+                                                <SelectTrigger className="w-full mt-2">
+                                                    <SelectValue placeholder="Select Category" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="category1">Category 1</SelectItem>
+                                                    <SelectItem value="category2">Category 2</SelectItem>
+                                                    <SelectItem value="category3">Category 3</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    </div>
+                                    <div className="grow">
+                                        <Label>SKU</Label>
+                                        <Input type="text" placeholder="Stock Keeping Unit" className="mt-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Description</Label>
+                                    <textarea
+                                        rows={8}
+                                        className="w-full mt-2 p-2 border rounded-lg"
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+                            <legend className="text-xl">Pricing & Inventory</legend>
+                            <div className="flex flex-col gap-3">
+                                <div className="flex gap-3">
+                                    <div className='grow'>
+                                        <Label>Price</Label>
+                                        <Input type="number" placeholder="Product Price" className="mt-2" />
+                                    </div>
+                                    <div className='grow'>
+                                        <Label>Cost</Label>
+                                        <Input type="number" placeholder="Product Cost" className="mt-2" />
+                                    </div>
+                                </div>
+                                <div className="flex gap-3">
+                                    <div className='grow'>
+                                        <Label>Quantity</Label>
+                                        <Input type="number" placeholder="Available Quantity" className="mt-2" />
+                                    </div>
+                                    <div className='grow'>
+                                        <Label>Reorder Level</Label>
+                                        <Input type="number" placeholder="Reorder Level" className="mt-2" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label>Availability Status</Label>
+                                    <div>
+                                        <Select>
+                                            <SelectTrigger className="w-full mt-2">
+                                                <SelectValue placeholder="Select Status" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="in_stock">In Stock</SelectItem>
+                                                <SelectItem value="out_of_stock">Out of Stock</SelectItem>
+                                                <SelectItem value="pre_order">Pre-order</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+                            <legend className="text-xl">Supplier Information</legend>
+                            <div className="flex flex-col gap-3">
+                                <div>
+                                    <Label>Supplier Name</Label>
+                                    <Input type="text" placeholder="Supplier Name" className="mt-2" />
+                                </div>
+
+                                <div>
+                                    <Label>Supplier Phone</Label>
+                                    <Input type="tel" placeholder="Supplier Phone" className="mt-2" />
+                                </div>
+                                <div>
+                                    <Label>Supplier Company</Label>
+                                    <Input type="text" placeholder="Supplier Company" className="mt-2" />
+                                </div>
+                                <div>
+                                    <Label>Supplier Address</Label>
+                                    <textarea
+                                        rows={2}
+                                        className="w-full mt-2 p-2 border rounded-lg"
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
-                <div className="space-y-1">
-                    <Label htmlFor="description" className="text-sm font-medium text-gray-700">Description</Label>
-                    <textarea id="description" placeholder="Enter product description" rows={5} className="w-full border rounded-md p-2"/>
-                </div>
-            </CardContent>
-        </Card>
 
-        {/* <!-- Pricing and Availability Section --> */}
-        <Card className="p-4 shadow-sm border border-gray-200 rounded-lg">
-            <CardHeader className="p-0 mb-4">
-                <CardTitle className="text-sm font-semibold text-gray-800">Pricing and Availability</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0 space-y-4">
-                <div className="space-y-1">
-                    <Label htmlFor="stock-quantity" className="text-sm font-medium text-gray-700">Stock Quantity</Label>
-                    <Input type="number" id="stock-quantity" className="w-full" placeholder="Enter stock quantity" min="0" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="avg-quantity" className="text-sm font-medium text-gray-700">Avg Quantity</Label>
-                    <Input type="number" id="avg-quantity" className="w-full" placeholder="Enter average quantity" min="0" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="buy-price" className="text-sm font-medium text-gray-700">Buy Price ($)</Label>
-                    <Input type="number" id="buy-price" className="w-full" placeholder="Enter buy price" step="0.01" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="sale-price" className="text-sm font-medium text-gray-700">Sale Price ($)</Label>
-                    <Input type="number" id="sale-price" className="w-full" placeholder="Enter sale price" step="0.01" />
-                </div>
-                <div className="space-y-1">
-                    <Label htmlFor="stock-availability" className="text-sm font-medium text-gray-700">Stock Availability</Label>
-                    <Select>
-                        <SelectTrigger id="stock-availability">
-                            <SelectValue placeholder="Select availability" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="available">Available</SelectItem>
-                            <SelectItem value="unavailable">Unavailable</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
-            </CardContent>
-        </Card>
-
-        {/* <!-- Product Images Section --> */}
-        <Card className="p-4 shadow-sm border border-gray-200 rounded-lg">
-            <CardHeader className="p-0 mb-4">
-                <CardTitle className="text-sm font-semibold text-gray-800">Product Images</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-                <div className="border-2 border-dashed border-gray-300 rounded-md p-6 text-center hover:border-blue-500 transition-colors">
-                    <Label htmlFor="product-images" className="cursor-pointer block">
-                        <div className="text-sm font-medium text-gray-700">Drag images here or click to upload</div>
-                        <Input type="file" id="product-images" className="hidden" accept="image/*" multiple />
-                    </Label>
-                    <div className="mt-2 text-xs text-gray-500">Supports JPEG, PNG. Upload multiple images.</div>
-                </div>
-                {/* Placeholder for preview - in real app, use state to show previews */}
-                <div className="mt-4 space-y-2">
-                    {/* Add JS to display uploaded file names or previews */}
-                </div>
-            </CardContent>
-        </Card>
-    </form>
-    <div className="mt-6 flex justify-end">
-        <Button type="submit" className="px-6 py-2">Add Product</Button>
-    </div>
-</Card>
+            </div>
         </div>
     )
 }
