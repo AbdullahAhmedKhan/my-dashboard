@@ -111,7 +111,7 @@ export const columns: ColumnDef<Order>[] = [
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>View details</DropdownMenuItem>
-                        <DropdownMenuItem>Update status</DropdownMenuItem>
+                        <DropdownMenuItem >Update status</DropdownMenuItem>
                         <DropdownMenuItem className="text-red-600">Cancel order</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

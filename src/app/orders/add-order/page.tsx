@@ -10,15 +10,16 @@ import React, { useState } from 'react'
 
 interface OrderItem {
     product: string;
+    variant: string;
     quantity: string;
     price: string;
 }
 
 const AddOrderPage = () => {
-    const [orderItems, setOrderItems] = useState<OrderItem[]>([{ product: '', quantity: '', price: '' }]);
+    const [orderItems, setOrderItems] = useState<OrderItem[]>([{ product: '', variant: '', quantity: '', price: '' }]);
 
     const addOrderItem = () => {
-        setOrderItems(prev => [...prev, { product: '', quantity: '', price: '' }]);
+        setOrderItems(prev => [...prev, { product: '', variant: '', quantity: '', price: '' }]);
     };
 
     const updateOrderItem = (index: number, field: keyof OrderItem, value: string) => {
@@ -162,17 +163,35 @@ const AddOrderPage = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div>
-                                        <Label>Price</Label>
-                                        <Input
-                                            type="number"
-                                            placeholder="Price per unit"
-                                            value={item.price}
-                                            onChange={(e) => updateOrderItem(index, 'price', e.target.value)}
-                                            className="mt-2"
-                                            min="0"
-                                            step="0.01"
-                                        />
+                                    <div className="flex gap-3">
+                                        <div className="grow">
+                                            <Label>Variant</Label>
+                                            <Select
+                                                value={item.variant}
+                                                onValueChange={(value) => updateOrderItem(index, 'variant', value)}
+                                            >
+                                                <SelectTrigger className="w-full mt-2">
+                                                    <SelectValue placeholder="Select Variant" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="variant1">Variant 1</SelectItem>
+                                                    <SelectItem value="variant2">Variant 2</SelectItem>
+                                                    <SelectItem value="variant3">Variant 3</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className='grow'>
+                                            <Label>Price</Label>
+                                            <Input
+                                                type="number"
+                                                placeholder="Price per unit"
+                                                value={item.price}
+                                                onChange={(e) => updateOrderItem(index, 'price', e.target.value)}
+                                                className="mt-2"
+                                                min="0"
+                                                step="0.01"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

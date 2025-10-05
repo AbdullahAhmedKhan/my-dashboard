@@ -36,8 +36,8 @@ const AppSidebar = () => {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarSeparator />
-            <SidebarContent>
-                <SidebarGroup>
+            <SidebarContent className='gap-0'>
+                <SidebarGroup className='py-0'>
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
@@ -54,10 +54,7 @@ const AppSidebar = () => {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-
-
-                <SidebarGroup>
-                    <SidebarGroupLabel>Items</SidebarGroupLabel>
+                <SidebarGroup className='py-0'>
                     <SidebarMenu>
                         <Collapsible defaultOpen className="group/collapsible">
                             <SidebarMenuItem>
@@ -85,8 +82,7 @@ const AppSidebar = () => {
                         </Collapsible>
                     </SidebarMenu>
                 </SidebarGroup>
-                <SidebarGroup>
-                    <SidebarGroupLabel>order</SidebarGroupLabel>
+                <SidebarGroup className='py-0'>
                     <SidebarMenu>
                         <Collapsible defaultOpen className="group/collapsible">
                             <SidebarMenuItem>
