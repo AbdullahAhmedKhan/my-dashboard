@@ -76,7 +76,7 @@ const AppSidebar = () => {
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/products/add-product"><Plus />Add Products</Link>
+                                                <Link href="/products/add-product"><Plus />Add Product</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>
@@ -105,7 +105,7 @@ const AppSidebar = () => {
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="#"><Plus />Add Orders</Link>
+                                                <Link href="/orders/add-order"><Plus />Add Order</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>
