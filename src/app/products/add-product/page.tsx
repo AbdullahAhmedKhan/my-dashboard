@@ -16,6 +16,7 @@ interface Variant {
     stock: string;
     sku: string;
     imageUrl: string | null;
+    colorCode?: string;
 }
 
 const Page = () => {
@@ -42,7 +43,7 @@ const Page = () => {
     };
 
     const addVariant = () => {
-        setVariants(prev => [...prev, { type: '', value: '', price: '', stock: '', sku: '', imageUrl: null }]);
+        setVariants(prev => [...prev, { type: '', value: '', price: '', stock: '', sku: '', imageUrl: null, colorCode: '' }]);
     };
 
     const updateVariant = (index: number, field: keyof Variant, value: string) => {
@@ -331,6 +332,18 @@ const Page = () => {
                                                         />
                                                     </div>
                                                 </div>
+                                                {variant.type === 'color' && (
+                                                    <div>
+                                                        <Label>Color Code</Label>
+                                                        <Input
+                                                            type="text"
+                                                            placeholder="e.g., #FF0000"
+                                                            value={variant.colorCode || ''}
+                                                            onChange={(e) => updateVariant(index, 'colorCode', e.target.value)}
+                                                            className="mt-2"
+                                                        />
+                                                    </div>
+                                                )}
                                                 <div className="flex gap-3">
                                                     <div className='grow'>
                                                         <Label>Price</Label>
@@ -361,7 +374,7 @@ const Page = () => {
                                                         value={variant.sku}
                                                         onChange={(e) => updateVariant(index, 'sku', e.target.value)}
                                                         className="mt-2"
-                                                    />
+                                                        />
                                                 </div>
                                                 <div>
                                                     <Label>Variant Image</Label>

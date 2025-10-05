@@ -1,6 +1,6 @@
 import { url } from 'inspector'
 import React from 'react'
-import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight } from 'lucide-react'
+import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight, ShoppingBasket, BaggageClaim, BaggageClaimIcon } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarSeparator } from './ui/sidebar'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -77,6 +77,35 @@ const AppSidebar = () => {
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
                                                 <Link href="/products/add-product"><Plus />Add Products</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                    </SidebarMenuSub>
+                                </CollapsibleContent>
+                            </SidebarMenuItem>
+                        </Collapsible>
+                    </SidebarMenu>
+                </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel>order</SidebarGroupLabel>
+                    <SidebarMenu>
+                        <Collapsible defaultOpen className="group/collapsible">
+                            <SidebarMenuItem>
+                                <CollapsibleTrigger asChild>
+                                    <SidebarMenuButton>
+                                        <ShoppingBasket /> Orders
+                                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                                    </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                    <SidebarMenuSub>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/orders"><BaggageClaimIcon />See All Orders</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="#"><Plus />Add Orders</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>
