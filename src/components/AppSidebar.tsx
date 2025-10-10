@@ -1,6 +1,6 @@
 import { url } from 'inspector'
 import React from 'react'
-import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight, ShoppingBasket, BaggageClaim, BaggageClaimIcon } from 'lucide-react'
+import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight, ShoppingBasket, BaggageClaim, BaggageClaimIcon, Computer, StretchHorizontal, ListPlus } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarSeparator } from './ui/sidebar'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -102,6 +102,44 @@ const AppSidebar = () => {
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
                                                 <Link href="/orders/add-order"><Plus />Add Order</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                    </SidebarMenuSub>
+                                </CollapsibleContent>
+                            </SidebarMenuItem>
+                        </Collapsible>
+                    </SidebarMenu>
+                </SidebarGroup>
+                <SidebarGroup className='py-0'>
+                    <SidebarMenu>
+                        <Collapsible defaultOpen className="group/collapsible">
+                            <SidebarMenuItem>
+                                <CollapsibleTrigger asChild>
+                                    <SidebarMenuButton>
+                                        <Computer /> Attribute
+                                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                                    </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                    <SidebarMenuSub>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/category"><StretchHorizontal />Manage Catagory</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/category/subcategory"><StretchHorizontal />Manage Sub-Catagory</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/orders/add-order"><ListPlus />Manage Variant</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/orders/add-order"><ListPlus />Manage Tags</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>

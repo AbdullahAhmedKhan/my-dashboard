@@ -101,7 +101,7 @@ const OrdersPage = () => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <div className="mt-3 mb-8 px-4 py-2 bg-secondary rounded-md">
+            <div className="mt-3 mb-8">
                 <h1 className="font-semibold text-2xl">Order Management</h1>
                 <p className="text-sm text-muted-foreground">Manage and track all customer orders.</p>
             </div>
