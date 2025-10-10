@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Trash2, Edit, Search } from 'lucide-react';
+import { Plus, Edit, Search } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import {
   Table,
@@ -21,27 +21,37 @@ import {
   SheetDescription,
   SheetFooter,
 } from '@/components/ui/sheet';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
 
 type Subcategory = {
   id: string;
   name: string;
+  isActive: boolean;
 };
 
 const initialSubcategories: Subcategory[] = [
-  { id: 'SUB001', name: 'Smartphones' },
-  { id: 'SUB002', name: 'Laptops' },
-  { id: 'SUB003', name: 'Men’s Clothing' },
-  { id: 'SUB004', name: 'Women’s Clothing' },
-  { id: 'SUB005', name: 'Accessories' },
-  { id: 'SUB006', name: 'Footwear' },
-  { id: 'SUB007', name: 'Home Appliances' },
-  { id: 'SUB008', name: 'Books' },
+  { id: 'SUB001', name: 'Smartphones', isActive: true },
+  { id: 'SUB002', name: 'Laptops', isActive: true },
+  { id: 'SUB003', name: 'Men’s Clothing', isActive: false },
+  { id: 'SUB004', name: 'Women’s Clothing', isActive: true },
+  { id: 'SUB005', name: 'Accessories', isActive: true },
+  { id: 'SUB006', name: 'Footwear', isActive: false },
+  { id: 'SUB007', name: 'Home Appliances', isActive: true },
+  { id: 'SUB008', name: 'Books', isActive: true },
 ];
 
 const SubcategoryPage = () => {
   const [subcategories, setSubcategories] = useState<Subcategory[]>([]);
   const [filteredSubcategories, setFilteredSubcategories] = useState<Subcategory[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState<Subcategory | null>(null);
   const [editSubcategoryName, setEditSubcategoryName] = useState('');
@@ -54,12 +64,17 @@ const SubcategoryPage = () => {
   useEffect(() => {
     let filtered = subcategories;
     if (searchTerm) {
-      filtered = subcategories.filter(subcategory =>
+      filtered = filtered.filter(subcategory =>
         subcategory.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(subcategory =>
+        statusFilter === 'active' ? subcategory.isActive : !subcategory.isActive
+      );
+    }
     setFilteredSubcategories(filtered);
-  }, [searchTerm, subcategories]);
+  }, [searchTerm, statusFilter, subcategories]);
 
   const openAddSheet = () => {
     setSelectedSubcategory(null);
@@ -86,6 +101,7 @@ const SubcategoryPage = () => {
         const newSubcategory: Subcategory = {
           id: `SUB${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
           name: editSubcategoryName,
+          isActive: true,
         };
         setSubcategories([...subcategories, newSubcategory]);
       }
@@ -95,8 +111,11 @@ const SubcategoryPage = () => {
     }
   };
 
-  const handleDeleteSubcategory = (id: string) => {
-    setSubcategories(subcategories.filter(subcategory => subcategory.id !== id));
+  const handleToggleStatus = (id: string) => {
+    const updatedSubcategories = subcategories.map(sub =>
+      sub.id === id ? { ...sub, isActive: !sub.isActive } : sub
+    );
+    setSubcategories(updatedSubcategories);
   };
 
   return (
@@ -118,7 +137,7 @@ const SubcategoryPage = () => {
           <Plus className="mr-1" /> Add New Subcategory
         </Button>
       </div>
-      <div className='mb-4 flex space-x-2'>
+      <div className="mb-4 flex space-x-4">
         <div>
           <Label htmlFor="search">Search</Label>
           <div className="relative mt-1">
@@ -132,13 +151,27 @@ const SubcategoryPage = () => {
             />
           </div>
         </div>
+        <div>
+          <Label htmlFor="status-filter">Status</Label>
+          <Select onValueChange={(value) => setStatusFilter(value as 'all' | 'active' | 'inactive')} defaultValue="all">
+            <SelectTrigger id="status-filter" className="w-[180px] mt-1">
+              <SelectValue placeholder="Filter by status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="active">Active</SelectItem>
+              <SelectItem value="inactive">Inactive</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <div className="rounded-md border overflow-auto">
         <Table>
-          <TableHeader className='bg-muted/50'>
+          <TableHeader className="bg-muted/50">
             <TableRow>
               <TableHead>Subcategory Name</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className='w-[120px]'>Status</TableHead>
+              <TableHead className='w-[120px]'>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -146,19 +179,21 @@ const SubcategoryPage = () => {
               <TableRow key={subcategory.id}>
                 <TableCell>{subcategory.name}</TableCell>
                 <TableCell>
+                  <Switch
+                    checked={subcategory.isActive}
+                    onCheckedChange={() => handleToggleStatus(subcategory.id)}
+                    aria-label={`Toggle ${subcategory.name} status`}
+                    className="data-[state=checked]:bg-indigo-400 data-[state=unchecked]:bg-gray-300"
+                  />
+                  <span className="ml-2">{subcategory.isActive ? 'Active' : 'Inactive'}</span>
+                </TableCell>
+                <TableCell>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => openEditSheet(subcategory)}
                   >
                     <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleDeleteSubcategory(subcategory.id)}
-                  >
-                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </TableCell>
               </TableRow>
@@ -174,8 +209,8 @@ const SubcategoryPage = () => {
               {selectedSubcategory ? 'Update the subcategory name' : 'Create a new subcategory'}
             </SheetDescription>
           </SheetHeader>
-          <div className="py-4">
-            <Label>Subcategory Name</Label>
+          <div className="p-4">
+            <Label className="mb-2">Subcategory Name</Label>
             <Input
               value={editSubcategoryName}
               onChange={(e) => setEditSubcategoryName(e.target.value)}
@@ -184,10 +219,12 @@ const SubcategoryPage = () => {
             />
           </div>
           <SheetFooter>
-            <Button variant="outline" onClick={() => setIsSheetOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={handleSaveSubcategory}>Save Subcategory</Button>
+            <div className="flex justify-end gap-3">
+              <Button variant="outline" onClick={() => setIsSheetOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleSaveSubcategory}>Save Subcategory</Button>
+            </div>
           </SheetFooter>
         </SheetContent>
       </Sheet>

@@ -134,12 +134,12 @@ const AppSidebar = () => {
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/orders/add-order"><ListPlus />Manage Variant</Link>
+                                                <Link href="/variant"><ListPlus />Manage Variant</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/orders/add-order"><ListPlus />Manage Tags</Link>
+                                                <Link href="/tag"><ListPlus />Manage Tags</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>

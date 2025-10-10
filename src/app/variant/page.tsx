@@ -29,94 +29,93 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import Link from 'next/link';
 
-type Category = {
+type Variant = {
   id: string;
   name: string;
   isActive: boolean;
 };
 
-const initialCategories: Category[] = [
-  { id: 'CAT001', name: 'Electronics', isActive: true },
-  { id: 'CAT002', name: 'Clothing', isActive: true },
-  { id: 'CAT003', name: 'Home & Kitchen', isActive: false },
-  { id: 'CAT004', name: 'Books', isActive: true },
-  { id: 'CAT005', name: 'Sports & Outdoors', isActive: true },
-  { id: 'CAT006', name: 'Beauty & Personal Care', isActive: false },
-  { id: 'CAT007', name: 'Toys & Games', isActive: true },
-  { id: 'CAT008', name: 'Automotive', isActive: true },
+const initialVariants: Variant[] = [
+  { id: 'VAR001', name: 'Red', isActive: true },
+  { id: 'VAR002', name: 'Blue', isActive: true },
+  { id: 'VAR003', name: 'Small', isActive: false },
+  { id: 'VAR004', name: 'Medium', isActive: true },
+  { id: 'VAR005', name: 'Large', isActive: true },
+  { id: 'VAR006', name: 'Black', isActive: false },
+  { id: 'VAR007', name: 'White', isActive: true },
+  { id: 'VAR008', name: 'Extra Large', isActive: true },
 ];
 
-const CategoryPage = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
+const VariantPage = () => {
+  const [variants, setVariants] = useState<Variant[]>([]);
+  const [filteredVariants, setFilteredVariants] = useState<Variant[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-  const [editCategoryName, setEditCategoryName] = useState('');
+  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
+  const [editVariantName, setEditVariantName] = useState('');
 
   useEffect(() => {
-    setCategories(initialCategories);
-    setFilteredCategories(initialCategories);
+    setVariants(initialVariants);
+    setFilteredVariants(initialVariants);
   }, []);
 
   useEffect(() => {
-    let filtered = categories;
+    let filtered = variants;
     if (searchTerm) {
-      filtered = filtered.filter(category =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(variant =>
+        variant.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(category =>
-        statusFilter === 'active' ? category.isActive : !category.isActive
+      filtered = filtered.filter(variant =>
+        statusFilter === 'active' ? variant.isActive : !variant.isActive
       );
     }
-    setFilteredCategories(filtered);
-  }, [searchTerm, statusFilter, categories]);
+    setFilteredVariants(filtered);
+  }, [searchTerm, statusFilter, variants]);
 
   const openAddSheet = () => {
-    setSelectedCategory(null);
-    setEditCategoryName('');
+    setSelectedVariant(null);
+    setEditVariantName('');
     setIsSheetOpen(true);
   };
 
-  const openEditSheet = (category: Category) => {
-    setSelectedCategory(category);
-    setEditCategoryName(category.name);
+  const openEditSheet = (variant: Variant) => {
+    setSelectedVariant(variant);
+    setEditVariantName(variant.name);
     setIsSheetOpen(true);
   };
 
-  const handleSaveCategory = () => {
-    if (editCategoryName) {
-      if (selectedCategory) {
+  const handleSaveVariant = () => {
+    if (editVariantName) {
+      if (selectedVariant) {
         // Edit existing
-        const updatedCategories = categories.map(cat =>
-          cat.id === selectedCategory.id ? { ...cat, name: editCategoryName } : cat
+        const updatedVariants = variants.map(var_ =>
+          var_.id === selectedVariant.id ? { ...var_, name: editVariantName } : var_
         );
-        setCategories(updatedCategories);
+        setVariants(updatedVariants);
       } else {
         // Add new
-        const newCategory: Category = {
-          id: `CAT${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
-          name: editCategoryName,
+        const newVariant: Variant = {
+          id: `VAR${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+          name: editVariantName,
           isActive: true,
         };
-        setCategories([...categories, newCategory]);
+        setVariants([...variants, newVariant]);
       }
-      setEditCategoryName('');
+      setEditVariantName('');
       setIsSheetOpen(false);
-      setSelectedCategory(null);
+      setSelectedVariant(null);
     }
   };
 
   const handleToggleStatus = (id: string) => {
-    const updatedCategories = categories.map(cat =>
-      cat.id === id ? { ...cat, isActive: !cat.isActive } : cat
+    const updatedVariants = variants.map(var_ =>
+      var_.id === id ? { ...var_, isActive: !var_.isActive } : var_
     );
-    setCategories(updatedCategories);
+    setVariants(updatedVariants);
   };
 
   return (
@@ -128,14 +127,14 @@ const CategoryPage = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Category</BreadcrumbPage>
+            <BreadcrumbPage>Variant</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex justify-between items-center my-3">
-        <h2 className="text-2xl font-semibold">Manage Category</h2>
+        <h2 className="text-2xl font-semibold">Manage Variant</h2>
         <Button onClick={openAddSheet}>
-          <Plus className="mr-1" /> Add New Category
+          <Plus className="mr-1" /> Add New Variant
         </Button>
       </div>
       <div className="mb-4 flex space-x-4">
@@ -145,7 +144,7 @@ const CategoryPage = () => {
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               id="search"
-              placeholder="Search by category..."
+              placeholder="Search by variant..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-8 lg:min-w-lg"
@@ -170,29 +169,29 @@ const CategoryPage = () => {
         <Table>
           <TableHeader className="bg-muted/50">
             <TableRow>
-              <TableHead>Category Name</TableHead>
-              <TableHead className="w-[120px]">Status</TableHead>
-              <TableHead className="w-[120px]">Actions</TableHead>
+              <TableHead>Variant Name</TableHead>
+              <TableHead className="w-[120px] text-center">Status</TableHead>
+              <TableHead className="w-[80px] text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredCategories.map((category) => (
-              <TableRow key={category.id}>
-                <TableCell>{category.name}</TableCell>
-                <TableCell>
+            {filteredVariants.map((variant) => (
+              <TableRow key={variant.id}>
+                <TableCell>{variant.name}</TableCell>
+                <TableCell className="w-[120px] text-center">
                   <Switch
-                    checked={category.isActive}
-                    onCheckedChange={() => handleToggleStatus(category.id)}
-                    aria-label={`Toggle ${category.name} status`}
-                    className="data-[state=checked]:bg-teal-400 data-[state=unchecked]:bg-gray-300"
+                    checked={variant.isActive}
+                    onCheckedChange={() => handleToggleStatus(variant.id)}
+                    aria-label={`Toggle ${variant.name} status`}
+                    className="data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-gray-300"
                   />
-                  <span className="ml-2">{category.isActive ? 'Active' : 'Inactive'}</span>
+                  <span className="ml-2">{variant.isActive ? 'Active' : 'Inactive'}</span>
                 </TableCell>
-                <TableCell>
+                <TableCell className="w-[80px] text-center">
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => openEditSheet(category)}
+                    onClick={() => openEditSheet(variant)}
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
@@ -205,17 +204,17 @@ const CategoryPage = () => {
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>{selectedCategory ? 'Edit Category' : 'Add New Category'}</SheetTitle>
+            <SheetTitle>{selectedVariant ? 'Edit Variant' : 'Add New Variant'}</SheetTitle>
             <SheetDescription>
-              {selectedCategory ? 'Update the category name' : 'Create a new category'}
+              {selectedVariant ? 'Update the variant name' : 'Create a new variant'}
             </SheetDescription>
           </SheetHeader>
           <div className="p-4">
-            <Label className="mb-2">Category Name</Label>
+            <Label className="mb-2">Variant Name</Label>
             <Input
-              value={editCategoryName}
-              onChange={(e) => setEditCategoryName(e.target.value)}
-              placeholder="Enter category name"
+              value={editVariantName}
+              onChange={(e) => setEditVariantName(e.target.value)}
+              placeholder="Enter variant name"
               className="mb-4"
             />
           </div>
@@ -224,7 +223,7 @@ const CategoryPage = () => {
               <Button variant="outline" onClick={() => setIsSheetOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleSaveCategory}>Save Category</Button>
+              <Button onClick={handleSaveVariant}>Save Variant</Button>
             </div>
           </SheetFooter>
         </SheetContent>
@@ -233,4 +232,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default VariantPage;
