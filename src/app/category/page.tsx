@@ -56,6 +56,7 @@ const CategoryPage = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [editCategoryName, setEditCategoryName] = useState('');
+  const [editCategoryStatus, setEditCategoryStatus] = useState(true);
 
   useEffect(() => {
     setCategories(initialCategories);
@@ -80,12 +81,14 @@ const CategoryPage = () => {
   const openAddSheet = () => {
     setSelectedCategory(null);
     setEditCategoryName('');
+    setEditCategoryStatus(true);
     setIsSheetOpen(true);
   };
 
   const openEditSheet = (category: Category) => {
     setSelectedCategory(category);
     setEditCategoryName(category.name);
+    setEditCategoryStatus(category.isActive);
     setIsSheetOpen(true);
   };
 
@@ -94,7 +97,9 @@ const CategoryPage = () => {
       if (selectedCategory) {
         // Edit existing
         const updatedCategories = categories.map(cat =>
-          cat.id === selectedCategory.id ? { ...cat, name: editCategoryName } : cat
+          cat.id === selectedCategory.id 
+            ? { ...cat, name: editCategoryName, isActive: editCategoryStatus } 
+            : cat
         );
         setCategories(updatedCategories);
       } else {
@@ -102,21 +107,15 @@ const CategoryPage = () => {
         const newCategory: Category = {
           id: `CAT${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
           name: editCategoryName,
-          isActive: true,
+          isActive: editCategoryStatus,
         };
         setCategories([...categories, newCategory]);
       }
       setEditCategoryName('');
+      setEditCategoryStatus(true);
       setIsSheetOpen(false);
       setSelectedCategory(null);
     }
-  };
-
-  const handleToggleStatus = (id: string) => {
-    const updatedCategories = categories.map(cat =>
-      cat.id === id ? { ...cat, isActive: !cat.isActive } : cat
-    );
-    setCategories(updatedCategories);
   };
 
   return (
@@ -179,15 +178,7 @@ const CategoryPage = () => {
             {filteredCategories.map((category) => (
               <TableRow key={category.id}>
                 <TableCell>{category.name}</TableCell>
-                <TableCell>
-                  <Switch
-                    checked={category.isActive}
-                    onCheckedChange={() => handleToggleStatus(category.id)}
-                    aria-label={`Toggle ${category.name} status`}
-                    className="data-[state=checked]:bg-teal-400 data-[state=unchecked]:bg-gray-300"
-                  />
-                  <span className="ml-2">{category.isActive ? 'Active' : 'Inactive'}</span>
-                </TableCell>
+                <TableCell>{category.isActive ? 'Active' : 'Inactive'}</TableCell>
                 <TableCell>
                   <Button
                     variant="ghost"
@@ -207,7 +198,7 @@ const CategoryPage = () => {
           <SheetHeader>
             <SheetTitle>{selectedCategory ? 'Edit Category' : 'Add New Category'}</SheetTitle>
             <SheetDescription>
-              {selectedCategory ? 'Update the category name' : 'Create a new category'}
+              {selectedCategory ? 'Update the category name and status' : 'Create a new category'}
             </SheetDescription>
           </SheetHeader>
           <div className="p-4">
@@ -218,6 +209,16 @@ const CategoryPage = () => {
               placeholder="Enter category name"
               className="mb-4"
             />
+            <Label className="mb-2">Status</Label>
+            <div className="flex items-center space-x-2 mb-4">
+              <Switch
+                checked={editCategoryStatus}
+                onCheckedChange={setEditCategoryStatus}
+                aria-label="Toggle category status"
+                className="data-[state=checked]:bg-teal-400 data-[state=unchecked]:bg-gray-300"
+              />
+              <span>{editCategoryStatus ? 'Active' : 'Inactive'}</span>
+            </div>
           </div>
           <SheetFooter>
             <div className="flex justify-end gap-3">

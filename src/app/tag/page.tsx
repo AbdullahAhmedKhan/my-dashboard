@@ -55,6 +55,7 @@ const TagPage = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
   const [editTagName, setEditTagName] = useState('');
+  const [editTagStatus, setEditTagStatus] = useState(true);
 
   useEffect(() => {
     setTags(initialTags);
@@ -79,12 +80,14 @@ const TagPage = () => {
   const openAddSheet = () => {
     setSelectedTag(null);
     setEditTagName('');
+    setEditTagStatus(true);
     setIsSheetOpen(true);
   };
 
   const openEditSheet = (tag: Tag) => {
     setSelectedTag(tag);
     setEditTagName(tag.name);
+    setEditTagStatus(tag.isActive);
     setIsSheetOpen(true);
   };
 
@@ -93,7 +96,7 @@ const TagPage = () => {
       if (selectedTag) {
         // Edit existing
         const updatedTags = tags.map(tag =>
-          tag.id === selectedTag.id ? { ...tag, name: editTagName } : tag
+          tag.id === selectedTag.id ? { ...tag, name: editTagName, isActive: editTagStatus } : tag
         );
         setTags(updatedTags);
       } else {
@@ -101,21 +104,15 @@ const TagPage = () => {
         const newTag: Tag = {
           id: `TAG${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
           name: editTagName,
-          isActive: true,
+          isActive: editTagStatus,
         };
         setTags([...tags, newTag]);
       }
       setEditTagName('');
+      setEditTagStatus(true);
       setIsSheetOpen(false);
       setSelectedTag(null);
     }
-  };
-
-  const handleToggleStatus = (id: string) => {
-    const updatedTags = tags.map(tag =>
-      tag.id === id ? { ...tag, isActive: !tag.isActive } : tag
-    );
-    setTags(updatedTags);
   };
 
   return (
@@ -178,15 +175,7 @@ const TagPage = () => {
             {filteredTags.map((tag) => (
               <TableRow key={tag.id}>
                 <TableCell>{tag.name}</TableCell>
-                <TableCell>
-                  <Switch
-                    checked={tag.isActive}
-                    onCheckedChange={() => handleToggleStatus(tag.id)}
-                    aria-label={`Toggle ${tag.name} status`}
-                    className="data-[state=checked]:bg-rose-400 data-[state=unchecked]:bg-gray-300"
-                  />
-                  <span className="ml-2">{tag.isActive ? 'Active' : 'Inactive'}</span>
-                </TableCell>
+                <TableCell>{tag.isActive ? 'Active' : 'Inactive'}</TableCell>
                 <TableCell>
                   <Button
                     variant="ghost"
@@ -206,7 +195,7 @@ const TagPage = () => {
           <SheetHeader>
             <SheetTitle>{selectedTag ? 'Edit Tag' : 'Add New Tag'}</SheetTitle>
             <SheetDescription>
-              {selectedTag ? 'Update the tag name' : 'Create a new tag'}
+              {selectedTag ? 'Update the tag name and status' : 'Create a new tag'}
             </SheetDescription>
           </SheetHeader>
           <div className="p-4">
@@ -217,6 +206,16 @@ const TagPage = () => {
               placeholder="Enter tag name"
               className="mb-4"
             />
+            <Label className="mb-2">Status</Label>
+            <div className="flex items-center space-x-2 mb-4">
+              <Switch
+                checked={editTagStatus}
+                onCheckedChange={setEditTagStatus}
+                aria-label="Toggle tag status"
+                className="data-[state=checked]:bg-rose-400 data-[state=unchecked]:bg-gray-300"
+              />
+              <span>{editTagStatus ? 'Active' : 'Inactive'}</span>
+            </div>
           </div>
           <SheetFooter>
             <div className="flex justify-end gap-3">
