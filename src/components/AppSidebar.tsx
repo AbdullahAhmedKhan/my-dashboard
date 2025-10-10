@@ -116,7 +116,7 @@ const AppSidebar = () => {
                             <SidebarMenuItem>
                                 <CollapsibleTrigger asChild>
                                     <SidebarMenuButton>
-                                        <Computer /> Attribute
+                                        <Computer /> Manage Attribute
                                         <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                                     </SidebarMenuButton>
                                 </CollapsibleTrigger>
@@ -124,22 +124,22 @@ const AppSidebar = () => {
                                     <SidebarMenuSub>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/category"><StretchHorizontal />Manage Catagory</Link>
+                                                <Link href="/category"><StretchHorizontal />Catagory</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/category/subcategory"><StretchHorizontal />Manage Sub-Catagory</Link>
+                                                <Link href="/category/subcategory"><StretchHorizontal />Sub-Catagory</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/variant"><ListPlus />Manage Variant</Link>
+                                                <Link href="/variant"><ListPlus />Variant</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
-                                                <Link href="/tag"><ListPlus />Manage Tags</Link>
+                                                <Link href="/tag"><ListPlus />Tags</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>
