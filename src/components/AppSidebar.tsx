@@ -1,6 +1,6 @@
 import { url } from 'inspector'
 import React from 'react'
-import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight, ShoppingBasket, BaggageClaim, BaggageClaimIcon, Computer, StretchHorizontal, ListPlus } from 'lucide-react'
+import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Projector, Package, Settings, User2, PackageSearch, ChevronRight, ShoppingBasket, BaggageClaim, BaggageClaimIcon, Computer, StretchHorizontal, ListPlus, UserStar } from 'lucide-react'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarSeparator } from './ui/sidebar'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -140,6 +140,11 @@ const AppSidebar = () => {
                                         <SidebarMenuSubItem>
                                             <SidebarMenuSubButton asChild>
                                                 <Link href="/tag"><ListPlus />Tags</Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                        <SidebarMenuSubItem>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href="/supplier"><UserStar />Suppliers</Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
                                     </SidebarMenuSub>
