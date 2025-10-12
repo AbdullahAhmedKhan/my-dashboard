@@ -213,9 +213,9 @@ const Page = () => {
         <div className="card-header py-5 border-b bg-muted/5">
           <h2 className="px-5 text-xl font-semibold">Add New Product</h2>
         </div>
-        <div className="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
+        <div className="card-body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-3">
           <div>
-            <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+            <fieldset className="border p-3 xl:p-5 rounded-2xl h-full">
               <legend className="text-xl">Product Description</legend>
               <div className="flex flex-col gap-3">
                 <div>
@@ -299,7 +299,7 @@ const Page = () => {
             </fieldset>
           </div>
           <div>
-            <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+            <fieldset className="border p-3 xl:p-5 rounded-2xl h-full">
               <legend className="text-xl">Pricing & Inventory</legend>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3">
@@ -354,7 +354,7 @@ const Page = () => {
             </fieldset>
           </div>
           <div>
-            <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+            <fieldset className="border p-3 xl:p-5 rounded-2xl h-full">
               <legend className="text-xl">Product Image & Variant</legend>
               <div className="flex flex-col gap-3">
                 <div>

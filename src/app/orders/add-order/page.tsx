@@ -61,9 +61,9 @@ const AddOrderPage = () => {
                 <div className="card-header py-5 border-b bg-muted-foreground/5">
                     <h2 className="px-5 text-xl font-semibold">New Order Details</h2>
                 </div>
-                <div className="card-body grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+                <div className="card-body grid grid-cols-1 md:grid-cols-2 gap-5 p-3">
                     <div>
-                        <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+                        <fieldset className="border p-5 rounded-2xl h-full">
                             <legend className="text-xl">Customer Information</legend>
                             <div className="flex flex-col gap-3">
                                 <div>
@@ -90,7 +90,7 @@ const AddOrderPage = () => {
                         </fieldset>
                     </div>
                     <div>
-                        <fieldset className="border p-5 xl:p-8 rounded-2xl h-full">
+                        <fieldset className="border p-5 rounded-2xl h-full">
                             <legend className="text-xl">Order Details</legend>
                             <div className="flex flex-col gap-3">
                                 <div>
@@ -119,8 +119,8 @@ const AddOrderPage = () => {
                         </fieldset>
                     </div>
                 </div>
-                <div className="card-body p-5 border-t bg-muted-foreground/5">
-                    <fieldset className="border p-5 xl:p-8 rounded-2xl">
+                <div className="card-body p-3 border-t bg-muted-foreground/5">
+                    <fieldset className="border p-5 rounded-2xl">
                         <legend className="text-xl">Order Items</legend>
                         <Button variant="outline" onClick={addOrderItem} className="mb-4">
                             <Plus className="h-4 w-4 mr-2" /> Add Item
