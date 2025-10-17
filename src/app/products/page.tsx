@@ -297,12 +297,12 @@ const page = () => {
       </div>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="right" className="p-5 w-[400px] sm:w-[540px]">
+        <SheetContent side="right" className="p-5 w-[600px] sm:w-[700px] lg:w-[900px] max-w-[90vw]">
           <SheetHeader>
             <SheetTitle>{selectedProduct?.name}</SheetTitle>
           </SheetHeader>
           {selectedProduct && (
-            <div className="py-4">
+            <div className="py-4 min-w-[800px]">
               <div className="flex justify-center mb-4">
                 <Image 
                   src={selectedProduct.image} 
