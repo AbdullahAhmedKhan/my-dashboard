@@ -15,7 +15,7 @@ import Rings05 from '../../assets/images/products/Rings05.webp'
 import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet"
-import { useState } from "react"
+import React, { useState } from 'react';
 
 // Product data array
 const products = [
@@ -302,7 +302,7 @@ const page = () => {
             <SheetTitle>{selectedProduct?.name}</SheetTitle>
           </SheetHeader>
           {selectedProduct && (
-            <div className="py-4 min-w-[800px]">
+            <div className="py-4">
               <div className="flex justify-center mb-4">
                 <Image 
                   src={selectedProduct.image} 
