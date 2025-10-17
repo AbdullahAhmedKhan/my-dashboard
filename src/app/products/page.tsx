@@ -171,7 +171,7 @@ const products = [
   }
 ];
 
-const page = () => {
+const Products = () => {
   const [isOpen, setIsOpen] = useState(false);
   type Product = typeof products[number];
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -362,4 +362,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Products
